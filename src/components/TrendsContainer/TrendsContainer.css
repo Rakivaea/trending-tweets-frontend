@@ -1,0 +1,90 @@
+h3 {
+  margin: 0px;
+}
+
+.trends-container {
+  position: absolute;
+  height: 450px;
+  width: 300px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  right: 0;
+  color: white;
+}
+
+.trends--navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 8px;
+  margin-bottom: 0;
+}
+
+.trends--location {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: auto;
+  height: 32px;
+  padding: 8px;
+}
+
+.trends--title {
+  font-size: 1.7em;
+  text-align: center;
+}
+
+.icon {
+  position: absolute;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  right: 0;
+  padding: 5px;
+}
+
+.trends--list-container {
+  height: 300px;
+  width: 99%;
+  overflow: auto;
+}
+
+.trends--list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trends--list--item {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.trends--list--item a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: white;
+  padding: 8px;
+}
+.trends--list--item a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.item--heading,
+.item--tweets {
+  padding: 0;
+  margin: 0;
+}
+
+.item--tweets {
+  font-size: small;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.trends--footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 8px;
+}
