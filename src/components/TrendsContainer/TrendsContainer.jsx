@@ -57,7 +57,7 @@ export default function TrendsContainer(props) {
           </header>
           <div className="trends--location">
             <div className="trends--location-title">
-              <h2 title={countryCode} className="flag-icon">
+              <h2 title={countryName} className="flag-icon">
                 {countryFlag}
               </h2>
               <h3>{locationName} Trends</h3>
@@ -70,7 +70,13 @@ export default function TrendsContainer(props) {
             <ul className="trends--list">{trendsList}</ul>
           </div>
           <footer>
-            <div className="footer--about"></div>
+            <div className="footer--about">
+              <details>
+                <summary title="Show 'About' section">About</summary> Press on
+                any location on the map and get the current trending Twitter
+                topics around that area.
+              </details>
+            </div>
             <div className="footer--author">
               <p>Made using </p>
               <AiOutlineTwitter size="1.25em" className="twitter-icon" />
