@@ -1,12 +1,18 @@
-import { numberWithCommas } from "../../utils/utils";
+import { getFlagEmoji, numberWithCommas } from "../../utils/utils";
 import { useEffect, useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
-import { AiFillEyeInvisible } from "react-icons/ai";
+import {
+  AiFillEyeInvisible,
+  AiFillEye,
+  AiOutlineTwitter,
+} from "react-icons/ai";
 import "./TrendsContainer.css";
 import { nanoid } from "nanoid";
 
 export default function TrendsContainer(props) {
+  const [showPanel, setShowPanel] = useState(true);
   let countryName;
+  let countryFlag;
   let countryCode;
   let locationName;
   let trendsList;
@@ -14,6 +20,7 @@ export default function TrendsContainer(props) {
   } else {
     countryName = props.twitterData.nearMe[0].country;
     countryCode = props.twitterData.nearMe[0].countryCode;
+    countryFlag = getFlagEmoji(countryCode);
     locationName = props.twitterData.nearMe[0].name;
     trendsList = props.twitterData.trends[0].trends;
     trendsList = trendsList.map((trend) => {
@@ -35,25 +42,51 @@ export default function TrendsContainer(props) {
   }
 
   return (
-    <div className="trends-container">
-      <div className="trends--navigation">
-        <h3 className="trends--title">Twitter Trends</h3>
-        <div className="icon">
-          <AiFillEyeInvisible />
+    <>
+      {showPanel ? (
+        <div className="trends-container">
+          <header>
+            <h1>Twitter Trends</h1>
+            <div
+              className="icon-in-container"
+              onClick={() => setShowPanel((prevState) => !prevState)}
+              title="Hide trends list"
+            >
+              <AiFillEyeInvisible />
+            </div>
+          </header>
+          <div className="trends--location">
+            <div className="trends--location-title">
+              <h2 title={countryCode} className="flag-icon">
+                {countryFlag}
+              </h2>
+              <h3>{locationName} Trends</h3>
+            </div>
+            {props.isLoading && (
+              <SpinningCircles height={"2em"} width={"2em"} speed={"1.1"} />
+            )}
+          </div>
+          <div className="trends--list-container">
+            <ul className="trends--list">{trendsList}</ul>
+          </div>
+          <footer>
+            <div className="footer--about"></div>
+            <div className="footer--author">
+              <p>Made using </p>
+              <AiOutlineTwitter size="1.25em" className="twitter-icon" />
+              <p>Twitter API</p>
+            </div>
+          </footer>
         </div>
-      </div>
-      <div className="trends--location">
-        <h3>{locationName} Trends</h3>
-        {props.isLoading && (
-          <SpinningCircles height={"2em"} width={"2em"} speed={"1.1"} />
-        )}
-      </div>
-      <div className="trends--list-container">
-        <ul className="trends--list">{trendsList}</ul>
-      </div>
-      <div className="trends--footer">
-        <p>Made using Twitter API</p>
-      </div>
-    </div>
+      ) : (
+        <div
+          className="icon-no-container"
+          title="Show trends list"
+          onClick={() => setShowPanel((prevState) => !prevState)}
+        >
+          <AiFillEye />
+        </div>
+      )}
+    </>
   );
 }

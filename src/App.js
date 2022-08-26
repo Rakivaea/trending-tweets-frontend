@@ -65,7 +65,9 @@ function App() {
             center={center}
             setCurrentCoords={setCurrentCoords}
           >
-            <Marker position={currentCoords} />
+            {currentCoords.lng !== 0 && currentCoords.lat !== 0 && (
+              <Marker position={currentCoords} />
+            )}
           </GoogleMap>
         </Wrapper>
       </div>
