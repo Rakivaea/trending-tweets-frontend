@@ -12,6 +12,7 @@ export default function GoogleMap(props) {
     if (ref.current && !map) {
       setMap(
         new window.google.maps.Map(ref.current, {
+          zoomControl: !props.isMobile,
           zoom: props.zoom,
           center: props.center,
           fullscreenControl: false,

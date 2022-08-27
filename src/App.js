@@ -4,6 +4,8 @@ import GoogleMap from "./components/GoogleMap/GoogleMap";
 import Marker from "./components/Marker/Marker";
 import TrendsContainer from "./components/TrendsContainer/TrendsContainer";
 import { useState, useEffect, useCallback } from "react";
+import { isEmpty } from "./utils/utils";
+import { useMediaQuery } from "react-responsive";
 
 function App() {
   const API_URLS = {
@@ -22,6 +24,7 @@ function App() {
   const [twitterData, setTwitterData] = useState({});
   const [currentCoords, setCurrentCoords] = useState({ lat: 0, lng: 0 });
   const [isLoading, setIsLoading] = useState(false);
+  const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
   const fetchTwitterTrends = useCallback(async () => {
     try {
       console.log(
@@ -45,7 +48,7 @@ function App() {
     }
   }, [currentCoords]);
 
-  // // Load twitter trends on initialization of webpage, or when coords change
+  // Load twitter trends on initialization of webpage, or when coords change
   useEffect(() => {
     console.log(currentCoords);
     fetchTwitterTrends();
@@ -64,6 +67,7 @@ function App() {
             zoom={zoom}
             center={center}
             setCurrentCoords={setCurrentCoords}
+            isMobile={isMobile}
           >
             {currentCoords.lng !== 0 && currentCoords.lat !== 0 && (
               <Marker position={currentCoords} />
@@ -72,7 +76,15 @@ function App() {
         </Wrapper>
       </div>
       <div className="layer2">
-        <TrendsContainer isLoading={isLoading} twitterData={twitterData} />
+        {isEmpty(twitterData) ? (
+          <></>
+        ) : (
+          <TrendsContainer
+            isLoading={isLoading}
+            isMobile={isMobile}
+            twitterData={twitterData}
+          />
+        )}
       </div>
     </div>
   );

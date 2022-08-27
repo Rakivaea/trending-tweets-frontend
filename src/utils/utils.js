@@ -13,3 +13,7 @@ export function getFlagEmoji(countryCode) {
     return String.fromCodePoint("127758");
   }
 }
+
+export function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}

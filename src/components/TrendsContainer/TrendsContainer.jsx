@@ -1,5 +1,6 @@
-import { getFlagEmoji, numberWithCommas } from "../../utils/utils";
+import { getFlagEmoji, isEmpty, numberWithCommas } from "../../utils/utils";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { SpinningCircles } from "react-loading-icons";
 import {
   AiFillEyeInvisible,
@@ -16,7 +17,9 @@ export default function TrendsContainer(props) {
   let countryCode;
   let locationName;
   let trendsList;
-  if (Object.keys(props.twitterData).length === 0) {
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
+  if (isEmpty(props.twitterData)) {
   } else {
     countryName = props.twitterData.nearMe[0].country;
     countryCode = props.twitterData.nearMe[0].countryCode;
@@ -44,15 +47,23 @@ export default function TrendsContainer(props) {
   return (
     <>
       {showPanel ? (
-        <div className="trends-container">
+        <div
+          className={
+            props.isMobile ? "trends-container--mobile" : "trends-container"
+          }
+        >
           <header>
             <h1>Twitter Trends</h1>
             <div
-              className="icon-in-container"
+              className={
+                props.isMobile
+                  ? "icon-in-container--mobile"
+                  : "icon-in-container"
+              }
               onClick={() => setShowPanel((prevState) => !prevState)}
               title="Hide trends list"
             >
-              <AiFillEyeInvisible />
+              <AiFillEyeInvisible size={props.isMobile ? "1.75em" : "1em"} />
             </div>
           </header>
           <div className="trends--location">
@@ -78,9 +89,14 @@ export default function TrendsContainer(props) {
               </details>
             </div>
             <div className="footer--author">
-              <p>Made using </p>
-              <AiOutlineTwitter size="1.25em" className="twitter-icon" />
-              <p>Twitter API</p>
+              <div className="footer--author-twitter">
+                <p>Made using </p>
+                <AiOutlineTwitter size="1.1em" className="twitter-icon" />
+                <p>Twitter API</p>
+              </div>
+              <div className="footer--author-name">
+                <p>Rakivaea Kvitting</p>
+              </div>
             </div>
           </footer>
         </div>
@@ -90,7 +106,7 @@ export default function TrendsContainer(props) {
           title="Show trends list"
           onClick={() => setShowPanel((prevState) => !prevState)}
         >
-          <AiFillEye />
+          <AiFillEye size={props.isMobile ? "1.75em" : "1em"} />
         </div>
       )}
     </>
