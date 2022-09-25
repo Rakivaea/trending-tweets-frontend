@@ -9,9 +9,10 @@ import { useMediaQuery } from "react-responsive";
 
 function App() {
   const API_URLS = {
-    trends: "http://localhost:3000/twitter/trends/",
-    nearMe: "http://localhost:3000/twitter/nearMe/",
-    trendsNearMe: "http://localhost:3000/twitter/trendsNearMe/",
+    trends: "https://trending-tweets-backend.onrender.com//twitter/trends/",
+    nearMe: "https://trending-tweets-backend.onrender.com//twitter/nearMe/",
+    trendsNearMe:
+      "https://trending-tweets-backend.onrender.com/twitter/trendsNearMe/",
   };
   const render = (status) => {
     return <h1>{status}</h1>;

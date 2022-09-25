@@ -17,7 +17,6 @@ export default function TrendsContainer(props) {
   let countryCode;
   let locationName;
   let trendsList;
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   if (isEmpty(props.twitterData)) {
   } else {
