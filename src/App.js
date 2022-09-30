@@ -1,5 +1,5 @@
 import "./App.css";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import { Wrapper } from "@googlemaps/react-wrapper";
 import GoogleMap from "./components/GoogleMap/GoogleMap";
 import Marker from "./components/Marker/Marker";
 import TrendsContainer from "./components/TrendsContainer/TrendsContainer";
@@ -78,9 +78,15 @@ function App() {
       </div>
       <div className="layer2">
         {isEmpty(twitterData) ? (
-          <></>
+          <TrendsContainer
+            firstLoad={true}
+            isLoading={true}
+            isMobile={isMobile}
+            twitterData={twitterData}
+          />
         ) : (
           <TrendsContainer
+            firstLoad={false}
             isLoading={isLoading}
             isMobile={isMobile}
             twitterData={twitterData}

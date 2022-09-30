@@ -80,6 +80,7 @@ header h1 {
 }
 
 .icon-no-container {
+  position: fixed;
   color: rgba(0, 0, 0, 0.6);
   margin-top: 8px;
 }

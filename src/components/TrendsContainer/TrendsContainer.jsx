@@ -1,6 +1,5 @@
 import { getFlagEmoji, isEmpty, numberWithCommas } from "../../utils/utils";
-import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
+import { useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
 import {
   AiFillEyeInvisible,
@@ -70,7 +69,11 @@ export default function TrendsContainer(props) {
               <h2 title={countryName} className="flag-icon">
                 {countryFlag}
               </h2>
-              <h3>{locationName} Trends</h3>
+              <h3>
+                {props.firstLoad
+                  ? "Loading Trends..."
+                  : `${locationName} Trends`}
+              </h3>
             </div>
             {props.isLoading && (
               <SpinningCircles height={"2em"} width={"2em"} speed={"1.1"} />

@@ -17,6 +17,7 @@ export default function GoogleMap(props) {
           center: props.center,
           fullscreenControl: false,
           streetViewControl: false,
+          gestureHandling: "greedy",
         })
       );
     }
